@@ -1,20 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SQLiteProvider } from "expo-sqlite";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import Home from "./screens/Home";
+import Lectures from "./screens/Lectures";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <SQLiteProvider databaseName="local.db"
+      onInit={async (db) => {
+        await db.execAsync(`
+          DROP TABLE IF EXISTS lectures;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+          CREATE TABLE IF NOT EXISTS lectures (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL
+          );
+
+          INSERT INTO lectures (title)
+          VALUES
+          ('Основы Java'),
+          ('Hello World');
+        `);
+      }}
+      options={{ useNewConnection: false }}>
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen name="Home" component={ Home } />
+            <Tab.Screen name="Lectures" component={ Lectures } />
+          </Tab.Navigator>
+        </NavigationContainer>
+    </SQLiteProvider>
+  )
+}
