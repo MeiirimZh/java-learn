@@ -12,7 +12,9 @@ export default function LecturesList() {
 
     return (
         <View style={ styles.main }>
-            <FlatList data={ lectures } renderItem={({item}) => {
+            <FlatList
+            data={ lectures }
+            renderItem={({item}) => {
                 const course = courses.find(
         		    (course) => course.id === item.course_id
         	    );
@@ -21,14 +23,18 @@ export default function LecturesList() {
                 return (
                     <LectureCard
                         title={ item.title } 
-                        isCompleted={ true }
+                        isCompleted={ false }
                         course_title={ course_title }
                         level={ item.level }
                         number={ item.number }
                         description={ item.description }
                         onPress={() => console.log("Lecture pressed!")} />
                 )
-            }} />
+            }}
+            showsVerticalScrollIndicator={ false }
+            ItemSeparatorComponent={() => (
+                <View style={{ height: theme.spacing.md }} />
+            )} />
         </View>
     )
 }
