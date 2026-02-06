@@ -6,6 +6,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./screens/Home";
 import Lectures from "./screens/Lectures";
 
+import { Ionicons } from "@expo/vector-icons";
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -28,9 +30,24 @@ export default function App() {
       }}
       options={{ useNewConnection: false }}>
         <NavigationContainer>
-          <Tab.Navigator>
-            <Tab.Screen name="Home" component={ Home } />
-            <Tab.Screen name="Lectures" component={ Lectures } />
+          <Tab.Navigator screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              const icons = {
+                Home: focused ? 'home' : 'home-outline',
+                Lectures: focused ? 'book' : 'book-outline'
+              } as const;
+
+              return (
+                <Ionicons
+                  name={icons[route.name as keyof typeof icons]}
+                  size={size}
+                  color={color}
+                />
+              );
+            }
+          })}>
+            <Tab.Screen name="Home" component={ Home } options={{ title: 'Главная' }} />
+            <Tab.Screen name="Lectures" component={ Lectures } options={{ title: 'Лекции', headerShown: false }} />
           </Tab.Navigator>
         </NavigationContainer>
     </SQLiteProvider>
