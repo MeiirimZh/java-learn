@@ -7,10 +7,21 @@ import Home from "./screens/Home";
 import Lectures from "./screens/Lectures";
 
 import { Ionicons } from "@expo/vector-icons";
+import { theme } from "./src/theme";
+import { useFonts } from "expo-font";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+      'Roboto Regular': require('./assets/fonts/Roboto Regular.ttf'),
+      'Roboto Bold': require('./assets/fonts/Roboto Bold.ttf'),
+    });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <SQLiteProvider databaseName="local.db"
       onInit={async (db) => {
@@ -44,6 +55,13 @@ export default function App() {
                   color={color}
                 />
               );
+            },
+            tabBarActiveTintColor: theme.colors.primary,
+            tabBarInactiveTintColor: theme.colors.textMuted,
+            tabBarStyle: { height: 100 },
+
+            headerStyle: {
+              height: 100
             }
           })}>
             <Tab.Screen name="Home" component={ Home } options={{ title: 'Главная' }} />
