@@ -1,10 +1,15 @@
 import { SQLiteProvider } from "expo-sqlite";
+import * as LecturesQueries from "./src/database/queries/LecturesQueries";
+import * as CoursesQueries from "./src/database/queries/CoursesQueries";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Home from "./screens/Home";
 import Lectures from "./screens/Lectures";
+
+import { courses } from "./assets/materials/courses";
+import { lectures } from "./assets/materials/lectures";
 
 import { Ionicons } from "@expo/vector-icons";
 import { theme } from "./src/theme";
@@ -25,19 +30,27 @@ export default function App() {
   return (
     <SQLiteProvider databaseName="local.db"
       onInit={async (db) => {
-        await db.execAsync(`
-          DROP TABLE IF EXISTS lectures;
+        await db.execAsync(CoursesQueries.DROP_TABLE);
+        await db.execAsync(CoursesQueries.CREATE_TABLE);
+        for (const course of courses) {
+          await db.runAsync(CoursesQueries.INSERT, [
+            course.title,
+          ]);
+        }
 
-          CREATE TABLE IF NOT EXISTS lectures (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL
-          );
-
-          INSERT INTO lectures (title)
-          VALUES
-          ('Основы Java'),
-          ('Hello World');
-        `);
+        await db.execAsync(LecturesQueries.DROP_TABLE);
+        await db.execAsync(LecturesQueries.CREATE_TABLE);
+        for (const lecture of lectures) {
+          await db.runAsync(LecturesQueries.INSERT, [
+            lecture.id,
+            lecture.title,
+            lecture.course_id,
+            lecture.level,
+            lecture.number,
+            lecture.description,
+            lecture.content
+          ]);
+        }
       }}
       options={{ useNewConnection: false }}>
         <NavigationContainer>
