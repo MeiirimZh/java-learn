@@ -1,9 +1,10 @@
 import { createStackNavigator } from "@react-navigation/stack";
+import { LecturesStackParamList } from "../src/navigation/types";
 
 import LecturesList from "./LecturesList";
 import ViewLecture from "./ViewLecture";
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<LecturesStackParamList>();
 
 export default function Lectures() {
     return (

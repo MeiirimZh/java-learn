@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Home from "./screens/Home";
 import Lectures from "./screens/Lectures";
+import LabWorks from "./screens/LabWorks";
 
 import { courses } from "./assets/materials/courses";
 import { lectures } from "./assets/materials/lectures";
@@ -58,7 +59,8 @@ export default function App() {
             tabBarIcon: ({ focused, color, size }) => {
               const icons = {
                 Home: focused ? 'home' : 'home-outline',
-                Lectures: focused ? 'book' : 'book-outline'
+                Lectures: focused ? 'book' : 'book-outline',
+                LabWorks: focused ? 'flask' : 'flask-outline',
               } as const;
 
               return (
@@ -79,6 +81,7 @@ export default function App() {
           })}>
             <Tab.Screen name="Home" component={ Home } options={{ title: 'Главная' }} />
             <Tab.Screen name="Lectures" component={ Lectures } options={{ title: 'Лекции', headerShown: false }} />
+            <Tab.Screen name="LabWorks" component={ LabWorks } options={{ title: 'Лаб. работы', headerShown: false }} />
           </Tab.Navigator>
         </NavigationContainer>
     </SQLiteProvider>

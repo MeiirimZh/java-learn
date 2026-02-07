@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { useSQLiteContext } from "expo-sqlite";
 
-import { Course } from "../../types";
+import { Pdf } from "../../types";
 
-const useCourses = () => {
-    const [ courses, setCourses ] = useState<Course[]>([]);
+const usePdf = () => {
+    const [ pdf, setPdf ] = useState<Pdf[]>([]);
     const [ loading, setLoading ] = useState<boolean>(true);
     const db = useSQLiteContext();
 
-    const loadCourses = async () => {
+    const loadPdf = async () => {
         try {
-            const results = await db.getAllAsync<Course>("SELECT * FROM courses ORDER BY id;");
-            setCourses(results);
+            const results = await db.getAllAsync<Pdf>("SELECT * FROM pdf ORDER BY id;");
+            setPdf(results);
         }
         catch (error) {
             console.log("Database error: ", error);
@@ -20,12 +20,12 @@ const useCourses = () => {
             setLoading(false);
         }
     };
-    
+
     useEffect(() => {
-        loadCourses();
+        loadPdf();
     }, []);
-    
-    return { courses, setCourses, loading };
+
+    return { pdf, setPdf, loading };
 };
 
-export default useCourses;
+export default usePdf;
