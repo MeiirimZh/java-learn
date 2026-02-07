@@ -4,9 +4,14 @@ import LectureCard from "../components/LectureCard";
 import useLectures from "../src/hooks/useLectures";
 import useCourses from "../src/hooks/useCourses";
 
+import { StackScreenProps } from "@react-navigation/stack";
+import { LecturesStackParamList } from "../src/navigation/types";
+
 import { theme } from "../src/theme";
 
-export default function LecturesList() {
+type Props = StackScreenProps<LecturesStackParamList, "LecturesList">;
+
+export default function LecturesList({ navigation }: Props) {
     const { lectures } = useLectures();
     const { courses } = useCourses();
 
@@ -27,8 +32,8 @@ export default function LecturesList() {
                         course_title={ course_title }
                         level={ item.level }
                         number={ item.number }
-                        description={ item.description }
-                        onPress={() => console.log("Lecture pressed!")} />
+                        description={ item.description.replace(/\s*\n\s*/g, " ").trim() }
+                        onPress={() => navigation.navigate("ViewLecture", { lecture: item })} />
                 )
             }}
             showsVerticalScrollIndicator={ false }
