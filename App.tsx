@@ -11,6 +11,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./screens/Home";
 import Lectures from "./screens/Lectures";
 import LabWorks from "./screens/LabWorks";
+import Tests from "./screens/Tests";
 
 import { courses } from "./assets/materials/courses";
 import { lectures } from "./assets/materials/lectures";
@@ -96,6 +97,7 @@ export default function App() {
                 Home: focused ? 'home' : 'home-outline',
                 Lectures: focused ? 'book' : 'book-outline',
                 LabWorks: focused ? 'flask' : 'flask-outline',
+                Tests: focused ? 'clipboard' : 'clipboard-outline',
               } as const;
 
               return (
@@ -117,6 +119,7 @@ export default function App() {
             <Tab.Screen name="Home" component={ Home } options={{ title: 'Главная' }} />
             <Tab.Screen name="Lectures" component={ Lectures } options={{ title: 'Лекции', headerShown: false }} />
             <Tab.Screen name="LabWorks" component={ LabWorks } options={{ title: 'Лаб. работы', headerShown: false }} />
+            <Tab.Screen name="Tests" component={ Tests } options={{ title: 'Тесты' }} />
           </Tab.Navigator>
         </NavigationContainer>
     </SQLiteProvider>
