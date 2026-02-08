@@ -1,9 +1,10 @@
 import { createStackNavigator } from "@react-navigation/stack";
+import { LabWorksStackParamList } from "../src/navigation/types";
 
 import LabWorksList from "./LabWorksList";
 import ViewLabWork from "./ViewLabWork";
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<LabWorksStackParamList>();
 
 export default function LabWorks() {
     return (

@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import Markdown from "react-native-markdown-display";
 
 import { StackScreenProps } from "@react-navigation/stack";
