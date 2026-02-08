@@ -18,3 +18,9 @@ export interface Pdf {
     title: string;
     file_name: string;
 };
+
+export interface LabWork {
+    id: number;
+    title: string;
+    pdf_id: number;
+};

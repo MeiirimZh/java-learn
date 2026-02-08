@@ -2,6 +2,7 @@ import { SQLiteProvider } from "expo-sqlite";
 import * as LecturesQueries from "./src/database/queries/LecturesQueries";
 import * as CoursesQueries from "./src/database/queries/CoursesQueries";
 import * as PdfQueries from "./src/database/queries/PdfQueries";
+import * as LabWorksQueries from "./src/database/queries/LabWorksQueries";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -13,6 +14,7 @@ import LabWorks from "./screens/LabWorks";
 import { courses } from "./assets/materials/courses";
 import { lectures } from "./assets/materials/lectures";
 import { pdf } from "./assets/materials/pdf";
+import { labWorks } from "./assets/materials/labWorks";
 
 import { Ionicons } from "@expo/vector-icons";
 import { theme } from "./src/theme";
@@ -63,6 +65,16 @@ export default function App() {
             pdf_file.file_name
           ]);
         }
+
+        await db.execAsync(LabWorksQueries.DROP_TABLE);
+        await db.execAsync(LabWorksQueries.CREATE_TABLE);
+        for (const labWork of labWorks) {
+          await db.runAsync(LabWorksQueries.INSERT, [
+            labWork.id,
+            labWork.title,
+            labWork.pdf_id
+          ]);
+        } 
       }}
       options={{ useNewConnection: false }}>
         <NavigationContainer>
