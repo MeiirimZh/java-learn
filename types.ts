@@ -24,3 +24,9 @@ export interface LabWork {
     title: string;
     pdf_id: number;
 };
+
+export interface Test {
+    id: number;
+    title: string;
+    link: string;
+}

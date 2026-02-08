@@ -3,6 +3,7 @@ import * as LecturesQueries from "./src/database/queries/LecturesQueries";
 import * as CoursesQueries from "./src/database/queries/CoursesQueries";
 import * as PdfQueries from "./src/database/queries/PdfQueries";
 import * as LabWorksQueries from "./src/database/queries/LabWorksQueries";
+import * as TestsQueries from "./src/database/queries/TestsQueries";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -15,6 +16,7 @@ import { courses } from "./assets/materials/courses";
 import { lectures } from "./assets/materials/lectures";
 import { pdf } from "./assets/materials/pdf";
 import { labWorks } from "./assets/materials/labWorks";
+import { tests } from "./assets/materials/tests";
 
 import { Ionicons } from "@expo/vector-icons";
 import { theme } from "./src/theme";
@@ -74,7 +76,17 @@ export default function App() {
             labWork.title,
             labWork.pdf_id
           ]);
-        } 
+        }
+
+        await db.execAsync(TestsQueries.DROP_TABLE);
+        await db.execAsync(TestsQueries.CREATE_TABLE);
+        for (const test of tests) {
+          await db.runAsync(TestsQueries.INSERT, [
+            test.id,
+            test.title,
+            test.link
+          ]);
+        }
       }}
       options={{ useNewConnection: false }}>
         <NavigationContainer>
