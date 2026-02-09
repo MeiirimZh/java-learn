@@ -21,8 +21,8 @@ export default function App() {
   const [ ready, setReady ] = useState<boolean>(false);
 
   const [ fontsLoaded ] = useFonts({
-      'Roboto Regular': require('./assets/fonts/Roboto Regular.ttf'),
-      'Roboto Bold': require('./assets/fonts/Roboto Bold.ttf'),
+      'Roboto Regular': require('./assets/fonts/Roboto-Regular.ttf'),
+      'Roboto Bold': require('./assets/fonts/Roboto-Bold.ttf'),
     });
 
   if (!fontsLoaded) {
