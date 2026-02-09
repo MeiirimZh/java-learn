@@ -1,5 +1,5 @@
 export const CREATE_TABLE = `
-    CREATE TABLE courses (
+    CREATE TABLE IF NOT EXISTS courses (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT NOT NULL
     );

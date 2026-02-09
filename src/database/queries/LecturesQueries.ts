@@ -1,5 +1,5 @@
 export const CREATE_TABLE = `
-    CREATE TABLE lectures (
+    CREATE TABLE IF NOT EXISTS lectures (
         id INTEGER PRIMARY KEY,
         title TEXT NOT NULL,
         course_id INTEGER REFERENCES courses(id),

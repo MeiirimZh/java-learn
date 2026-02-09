@@ -1,5 +1,5 @@
 export const CREATE_TABLE = `
-    CREATE TABLE pdf (
+    CREATE TABLE IF NOT EXISTS pdf (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT NOT NULL,
         file_name TEXT NOT NULL

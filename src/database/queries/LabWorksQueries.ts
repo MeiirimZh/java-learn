@@ -1,5 +1,5 @@
 export const CREATE_TABLE = `
-    CREATE TABLE lab_works (
+    CREATE TABLE IF NOT EXISTS lab_works (
         id INTEGER PRIMARY KEY,
         title TEXT NOT NULL,
         pdf_id INTEGER REFERENCES pdf(id)
