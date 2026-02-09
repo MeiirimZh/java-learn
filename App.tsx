@@ -26,7 +26,7 @@ import { useFonts } from "expo-font";
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
+  const [ fontsLoaded ] = useFonts({
       'Roboto Regular': require('./assets/fonts/Roboto Regular.ttf'),
       'Roboto Bold': require('./assets/fonts/Roboto Bold.ttf'),
     });
