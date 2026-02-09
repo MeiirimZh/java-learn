@@ -1,9 +1,10 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import AppText from "../components/AppText";
 
 export default function Home() {
     return (
-        <View>
-            <Text>Home</Text>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <AppText>Главная</AppText>
         </View>
     )
 }
