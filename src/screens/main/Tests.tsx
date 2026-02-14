@@ -1,9 +1,9 @@
 import { StyleSheet, View, FlatList, Linking } from "react-native";
-import TestCard from "../components/TestCard";
+import TestCard from "../../../components/TestCard";
 
-import useTests from "../src/hooks/useTests";
+import useTests from "../../../src/hooks/useTests";
 
-import { theme } from "../src/theme";
+import { theme } from "../../../src/theme";
 
 export default function Tests() {
     const { tests } = useTests();

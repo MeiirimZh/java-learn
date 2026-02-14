@@ -1,13 +1,13 @@
 import { StyleSheet, View, FlatList } from "react-native";
-import LectureCard from "../components/LectureCard";
+import LectureCard from "../../../components/LectureCard";
 
-import useLectures from "../src/hooks/useLectures";
-import useCourses from "../src/hooks/useCourses";
+import useLectures from "../../hooks/useLectures";
+import useCourses from "../../hooks/useCourses";
 
 import { StackScreenProps } from "@react-navigation/stack";
-import { LecturesStackParamList } from "../src/navigation/types";
+import { LecturesStackParamList } from "../../navigation/types";
 
-import { theme } from "../src/theme";
+import { theme } from "../../theme";
 
 type Props = StackScreenProps<LecturesStackParamList, "LecturesList">;
 

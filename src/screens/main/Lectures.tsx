@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { LecturesStackParamList } from "../src/navigation/types";
+import { LecturesStackParamList } from "../../navigation/types";
 
 import LecturesList from "./LecturesList";
 import ViewLecture from "./ViewLecture";

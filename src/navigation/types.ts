@@ -13,3 +13,8 @@ export type LabWorksStackParamList = {
         labWork: LabWork
     }
 };
+
+export type AuthStackParamList = {
+    Login: undefined,
+    Register: undefined
+}

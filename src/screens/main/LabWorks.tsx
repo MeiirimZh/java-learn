@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { LabWorksStackParamList } from "../src/navigation/types";
+import { LabWorksStackParamList } from "../../navigation/types";
 
 import LabWorksList from "./LabWorksList";
 import ViewLabWork from "./ViewLabWork";

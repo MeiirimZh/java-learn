@@ -3,9 +3,9 @@ import { StyleSheet, View, ScrollView } from "react-native";
 import Markdown from "react-native-markdown-display";
 
 import { StackScreenProps } from "@react-navigation/stack";
-import { LecturesStackParamList } from "../src/navigation/types";
+import { LecturesStackParamList } from "../../navigation/types";
 
-import { theme } from "../src/theme";
+import { theme } from "../../theme";
 
 type Props = StackScreenProps<LecturesStackParamList, "ViewLecture">;
 

@@ -1,12 +1,12 @@
 import { StyleSheet, View, FlatList } from "react-native";
-import LabWorkCard from "../components/LabWorkCard";
+import LabWorkCard from "../../../components/LabWorkCard";
 
-import useLabWorks from "../src/hooks/useLabWorks";
+import useLabWorks from "../../hooks/useLabWorks";
 
 import { StackScreenProps } from "@react-navigation/stack";
-import { LabWorksStackParamList } from "../src/navigation/types";
+import { LabWorksStackParamList } from "../../navigation/types";
 
-import { theme } from "../src/theme";
+import { theme } from "../../theme";
 
 type Props = StackScreenProps<LabWorksStackParamList, "LabWorksList">;
 
