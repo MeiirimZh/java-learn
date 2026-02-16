@@ -4,6 +4,8 @@ import RootNavigator from "./src/navigation/RootNavigator";
 
 import { useFonts } from "expo-font";
 
+import Toast from "react-native-toast-message";
+
 export default function App() {
   const [ fontsLoaded ] = useFonts({
     'Roboto Regular': require('./assets/fonts/Roboto-Regular.ttf'),
@@ -19,6 +21,8 @@ export default function App() {
       <NavigationContainer>
         <RootNavigator />
       </NavigationContainer>
+
+      <Toast />
     </AuthProvider>
   )
 }

@@ -4,12 +4,15 @@ import { View, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-nati
 import AppText from "../../../components/AppText";
 
 import { useAuth } from "../../context/AuthContext";
+import { FirebaseError } from "firebase/app";
 
 import { StackScreenProps } from "@react-navigation/stack";
 import { AuthStackParamList } from "../../navigation/types";
 
 import { theme } from "../../theme";
 import LogoIcon from "../../../assets/svg/LogoIcon";
+
+import Toast from "react-native-toast-message";
 
 type Props = StackScreenProps<AuthStackParamList, "Register">;
 
@@ -24,8 +27,23 @@ export default function Register({ navigation }: Props) {
         try {
             await register(email, password);
         }
-        catch (error: any) {
-            Alert.alert("Ошибка регистрации", error.message);
+        catch (error: unknown) {
+            if (error instanceof FirebaseError) {
+                let msg: string = "Ошибка";
+
+                if (error.code === "auth/invalid-email") {
+                    msg = "Неправильная почта";
+                }
+                else if  (error.code === "auth/missing-password") {
+                    msg = "Вы не ввели пароль";
+                }
+
+                Toast.show({
+                    type: 'error',
+                    text1: 'Ошибка ⚠️',
+                    text2: msg
+                });
+            }
         } finally {
             setLoading(false);
         }
