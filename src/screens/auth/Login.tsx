@@ -24,7 +24,7 @@ export default function Login({ navigation }: Props) {
             await login(email, password);
         }
         catch (error: any) {
-            Alert.alert("Ошибка входа", error);
+            Alert.alert("Ошибка входа", error.message);
         }
         finally {
             setLoading(false);

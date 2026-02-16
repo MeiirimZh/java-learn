@@ -26,12 +26,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 }, []);
 
     const login = async (email: string, password: string) => {
-            setLoading(true);
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-            } finally {
-            setLoading(false);
-        }
+        setLoading(true);
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+        } finally {
+        setLoading(false);
+      }
     };
 
     const register = async (email: string, password: string) => {
@@ -44,18 +44,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const logout = async () => {
-      setLoading(true);
-      try {
-        await signOut(auth);
-      } finally {
-        setLoading(false);
-      }
+    	setLoading(true);
+    	try {
+    	  await signOut(auth);
+    	} finally {
+    	  setLoading(false);
+    	}
     };
 
     return (
-      <AuthContext.Provider value={{ user, loading, login, register, logout }}>
-        {children}
-      </AuthContext.Provider>
+    	<AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    	  {children}
+    	</AuthContext.Provider>
     );
 };
 

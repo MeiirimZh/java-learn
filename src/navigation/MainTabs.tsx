@@ -4,6 +4,7 @@ import Home from "../screens/main/Home";
 import Lectures from "../screens/main/Lectures";
 import LabWorks from "../screens/main/LabWorks";
 import Tests from "../screens/main/Tests";
+import Profile from "../screens/main/Profile";
 
 import { Ionicons } from "@expo/vector-icons";
 import { theme } from "../theme";
@@ -19,6 +20,7 @@ export default function MainTabs() {
                 Lectures: focused ? 'book' : 'book-outline',
                 LabWorks: focused ? 'flask' : 'flask-outline',
                 Tests: focused ? 'clipboard' : 'clipboard-outline',
+                Profile: focused ? 'person' : 'person-outline',
               } as const;
 
               return (
@@ -41,6 +43,7 @@ export default function MainTabs() {
             <Tab.Screen name="Lectures" component={ Lectures } options={{ title: 'Лекции', headerShown: false }} />
             <Tab.Screen name="LabWorks" component={ LabWorks } options={{ title: 'Лаб. работы', headerShown: false }} />
             <Tab.Screen name="Tests" component={ Tests } options={{ title: 'Тесты' }} />
+            <Tab.Screen name="Profile" component={ Profile } options={{ title: 'Профиль' }} />
         </Tab.Navigator>
     )
 }
