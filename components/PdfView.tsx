@@ -1,16 +1,16 @@
 import { View, ActivityIndicator } from 'react-native';
 import AppText from './AppText';
-import Pdf from 'react-native-pdf';
+import Pdf, { PdfProps } from 'react-native-pdf';
 import { Asset } from 'expo-asset';
 import { useEffect, useState } from 'react';
 
 import { theme } from '../src/theme';
 
 type Props = {
-    path: number
-}
+    path: number,
+} & Partial<PdfProps>;
 
-export default function PdfView({ path }: Props) {
+export default function PdfView({ path, ...pdfProps }: Props) {
     const [localUri, setLocalUri] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -52,6 +52,7 @@ export default function PdfView({ path }: Props) {
                 source={{ uri: localUri }}
                 onError={(err) => console.error(err)}
                 style={{ flex: 1 }}
+                { ...pdfProps }
             />
         </View>
     )

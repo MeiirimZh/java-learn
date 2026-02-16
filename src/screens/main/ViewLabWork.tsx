@@ -1,5 +1,6 @@
-import { useLayoutEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { useState, useLayoutEffect, useEffect } from "react";
+import { StyleSheet, View } from "react-native";
+import AppText from "../../../components/AppText";
 
 import usePdf from "../../hooks/usePdf";
 
@@ -15,6 +16,10 @@ type Props = StackScreenProps<LabWorksStackParamList, "ViewLabWork">;
 export default function ViewLabWork({ route, navigation }: Props) {
     const { labWork } = route.params;
     const { pdf } = usePdf();
+
+    const [ currentPage, setCurrentPage ] = useState<number>(1);
+    const [ totalPages, setTotalPages ] = useState<number>(0);
+    const [ haveRead, setHaveRead ] = useState<boolean>(false);
 
     const pdfMap = {
         1: require('../../../assets/presentations/lab_work_1.pdf'),
@@ -39,6 +44,12 @@ export default function ViewLabWork({ route, navigation }: Props) {
             title: labWork.title
         });
     }, [navigation, labWork.title]);
+    
+    useEffect(() => {
+        if (currentPage === totalPages && !haveRead) {
+            setHaveRead(true);
+        }
+    }, [currentPage]);
 
     const pdfFile = pdf.find(
         (pdfFile) => pdfFile.id === labWork.pdf_id
@@ -47,7 +58,7 @@ export default function ViewLabWork({ route, navigation }: Props) {
     if (!pdfFile) {
         return (
             <View>
-                <Text>PDF не найден</Text>
+                <AppText>PDF не найден</AppText>
             </View>
         )
     }
@@ -58,7 +69,10 @@ export default function ViewLabWork({ route, navigation }: Props) {
 
     return (
         <View style={ styles.main }>
-            <PdfView path={ pdfSource } />
+            <PdfView
+                path={ pdfSource }
+                onLoadComplete={ (numberOfPages) => setTotalPages(numberOfPages) }
+                onPageChanged={ (page, numberOfPages) => setCurrentPage(page) } />
         </View>
     )
 }

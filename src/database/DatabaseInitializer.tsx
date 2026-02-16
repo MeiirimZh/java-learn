@@ -22,10 +22,10 @@ type Props = {
 
 export default function DatabaseInitializer({ onReady }: Props) {
     return (
-	<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: theme.spacing.sm }}>
-    	<ActivityIndicator size="large" color={ theme.colors.primary } />
+	    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: theme.spacing.sm }}>
+    	  <ActivityIndicator size="large" color={ theme.colors.primary } />
         <AppText style={{ color: theme.colors.textMuted }}>
-			Загрузка базы данных...
+			    Загрузка базы данных...
         </AppText>
 
         <SQLiteProvider
