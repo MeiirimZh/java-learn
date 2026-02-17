@@ -40,6 +40,7 @@ export default function ViewLecture({ route, navigation }: Props) {
     return (
         <View style={ styles.main }>
             <ScrollView
+                style={ styles.lecture }
                 showsVerticalScrollIndicator={ false }
                 onScroll={({ nativeEvent }) => {
                     const { layoutMeasurement, contentOffset, contentSize } = nativeEvent;
@@ -50,7 +51,6 @@ export default function ViewLecture({ route, navigation }: Props) {
                     
                     if (isEndReached) {
                         if (!haveRead) {
-                            console.log("End!");
                             setHaveRead(true);
                         }
                     }
@@ -65,6 +65,11 @@ export default function ViewLecture({ route, navigation }: Props) {
 const styles = StyleSheet.create({
     main: {
         flex: 1,
+        padding: theme.spacing.md
+    },
+    lecture: {
+        backgroundColor: theme.colors.bgLight,
+
         padding: theme.spacing.md
     }
 });
