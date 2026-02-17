@@ -1,4 +1,6 @@
-import { StyleSheet, View, FlatList } from "react-native";
+import { useState, useEffect } from "react";
+
+import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
 import LectureCard from "../../../components/LectureCard";
 
 import useLectures from "../../hooks/useLectures";
@@ -9,11 +11,44 @@ import { LecturesStackParamList } from "../../navigation/types";
 
 import { theme } from "../../theme";
 
+import { useAuth } from "../../context/AuthContext";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
+
 type Props = StackScreenProps<LecturesStackParamList, "LecturesList">;
 
 export default function LecturesList({ navigation }: Props) {
     const { lectures } = useLectures();
     const { courses } = useCourses();
+
+    const [ passedLectures, setPassedLectures ] = useState<number[]>([]);
+    const [ loading, setLoading ] = useState<boolean>(true);
+
+    const { user } = useAuth();
+
+    useEffect(() => {
+        if (!user) return;
+
+        const unsubscribe = onSnapshot(
+            doc(db, "users", user.uid),
+            (docSnap) => {
+                if (docSnap.exists()) {
+                    setPassedLectures(docSnap.data().passedLectures ?? []);
+                }
+                setLoading(false);
+            }
+        );
+
+        return unsubscribe;
+    }, [user]);
+
+    if (loading) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color={ theme.colors.primary } />
+            </View>
+        )
+    }
 
     return (
         <View style={ styles.main }>
@@ -28,7 +63,7 @@ export default function LecturesList({ navigation }: Props) {
                 return (
                     <LectureCard
                         title={ item.title } 
-                        isCompleted={ false }
+                        isCompleted={ passedLectures.includes(item.id) }
                         course_title={ course_title }
                         level={ item.level }
                         number={ item.number }
