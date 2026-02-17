@@ -11,6 +11,10 @@ import PdfView from "../../../components/PdfView";
 
 import { theme } from "../../theme";
 
+import { useAuth } from "../../context/AuthContext";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
+
 type Props = StackScreenProps<LabWorksStackParamList, "ViewLabWork">;
 
 export default function ViewLabWork({ route, navigation }: Props) {
@@ -20,6 +24,8 @@ export default function ViewLabWork({ route, navigation }: Props) {
     const [ currentPage, setCurrentPage ] = useState<number>(1);
     const [ totalPages, setTotalPages ] = useState<number>(0);
     const [ haveRead, setHaveRead ] = useState<boolean>(false);
+
+    const { user } = useAuth();
 
     const pdfMap = {
         1: require('../../../assets/presentations/lab_work_1.pdf'),
@@ -46,14 +52,26 @@ export default function ViewLabWork({ route, navigation }: Props) {
     }, [navigation, labWork.title]);
     
     useEffect(() => {
-        if (currentPage === totalPages && !haveRead) {
+        if (currentPage === totalPages && totalPages > 0) {
             setHaveRead(true);
         }
-    }, [currentPage]);
+    }, [currentPage, totalPages]);
 
     const pdfFile = pdf.find(
         (pdfFile) => pdfFile.id === labWork.pdf_id
     );
+
+    useEffect(() => {
+        if (!user || !haveRead) return;
+
+        const updateUser = async () => {
+            await updateDoc(doc(db, "users", user.uid), {
+                passedLabs: arrayUnion(labWork.id)
+            });
+        };
+
+        updateUser();
+    }, [haveRead, user, labWork.id]);
 
     if (!pdfFile) {
         return (

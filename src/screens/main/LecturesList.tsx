@@ -12,7 +12,7 @@ import { LecturesStackParamList } from "../../navigation/types";
 import { theme } from "../../theme";
 
 import { useAuth } from "../../context/AuthContext";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 
 type Props = StackScreenProps<LecturesStackParamList, "LecturesList">;
