@@ -9,7 +9,7 @@ interface AuthContextType {
     user: User | null;
     loading: boolean;
     login: (email: string, password: string) => Promise<void>;
-    register: (email: string, password: string) => Promise<void>;
+    register: (email: string, password: string, name: string, surname: string, group: string) => Promise<void>;
     logout: () => Promise<void>;
 }
 
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     };
 
-    const register = async (email: string, password: string) => {
+    const register = async (email: string, password: string, name: string, surname: string, group: string) => {
         setLoading(true);
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -45,6 +45,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             const newUser = userCredential.user;
 
             await setDoc(doc(db, "users", newUser.uid), {
+                name,
+                surname,
+                group,
                 passedTests: [],
                 passedLectures: [],
                 passedLabs: []

@@ -18,24 +18,44 @@ type Props = StackScreenProps<AuthStackParamList, "Register">;
 
 export default function Register({ navigation }: Props) {
     const { register } = useAuth();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [ name, setName ] = useState<string>("");
+    const [ surname, setSurname ] = useState<string>("");
+    const [ group, setGroup ] = useState<string>("");
+    const [ email, setEmail ] = useState("");
+    const [ password, setPassword ] = useState("");
+    const [ loading, setLoading ] = useState(false);
 
     const handleRegister = async () => {
         setLoading(true);
+
+        if (!name || !surname || !group) {
+            Toast.show({
+                type: 'error',
+                text1: 'Ошибка ⚠️',
+                text2: 'Заполните все поля'
+            });
+
+            return;
+        }
+
         try {
-            await register(email, password);
+            await register(email, password, name.trim(), surname.trim(), group.trim());
         }
         catch (error: unknown) {
             if (error instanceof FirebaseError) {
                 let msg: string = "Ошибка";
 
                 if (error.code === "auth/invalid-email") {
-                    msg = "Неправильная почта";
+                    msg = "Неверный email";
                 }
-                else if  (error.code === "auth/missing-password") {
+                else if (error.code === "auth/missing-password") {
                     msg = "Вы не ввели пароль";
+                }
+                else if (error.code === "auth/email-already-in-use") {
+                    msg = "Аккаунт с таким email уже существует";
+                }
+                else if (error.code === "auth/weak-password") {
+                    msg = "Слабый пароль"
                 }
 
                 Toast.show({
@@ -59,6 +79,21 @@ export default function Register({ navigation }: Props) {
                 <View style={ styles.content }>
                     <AppText style={{ fontSize: 24, alignSelf: 'center', color: theme.colors.text }}>Регистрация</AppText>
                     <View style={ styles.form }>
+                        <TextInput 
+                            placeholder="Имя"
+                            value={ name }
+                            onChangeText={ setName }
+                            style={ [styles.textInput, styles.shadow] } />
+                        <TextInput 
+                            placeholder="Фамилия"
+                            value={ surname }
+                            onChangeText={ setSurname }
+                            style={ [styles.textInput, styles.shadow] } />
+                        <TextInput 
+                            placeholder="Группа"
+                            value={ group }
+                            onChangeText={ setGroup }
+                            style={ [styles.textInput, styles.shadow] } />
                         <TextInput
                             placeholder="Email"
                             value={ email }
