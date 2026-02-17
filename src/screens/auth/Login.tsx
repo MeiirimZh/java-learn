@@ -31,11 +31,16 @@ export default function Login({ navigation }: Props) {
             if (error instanceof FirebaseError) {
                 let msg: string = "Ошибка";
 
+                console.log(error.message);
+
                 if (error.code === "auth/invalid-email") {
-                    msg = "Неправильная почта";
+                    msg = "Неверный email";
                 }
                 else if  (error.code === "auth/missing-password") {
-                    msg = "Вы не ввели пароль";
+                    msg = "Неверный пароль";
+                }
+                else if  (error.code === "auth/invalid-credential") {
+                    msg = "Неверный email или пароль";
                 }
 
                 Toast.show({

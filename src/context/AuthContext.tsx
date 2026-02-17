@@ -1,6 +1,9 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, User } from "firebase/auth";
 import { auth } from "../firebase/firebase";
+
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
 interface AuthContextType {
     user: User | null;
@@ -37,24 +40,34 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const register = async (email: string, password: string) => {
         setLoading(true);
         try {
-          await createUserWithEmailAndPassword(auth, email, password);
-        } finally {
-          setLoading(false);
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+            const newUser = userCredential.user;
+
+            await setDoc(doc(db, "users", newUser.uid), {
+                passedTests: [],
+                passedLectures: [],
+                passedLabs: []
+            });
+        }
+        finally {
+            setLoading(false);
         }
     };
 
     const logout = async () => {
     	setLoading(true);
-    	try {
-    	  await signOut(auth);
-    	} finally {
-    	  setLoading(false);
+        try {
+    	    await signOut(auth);
+    	}
+        finally {
+    	    setLoading(false);
     	}
     };
 
     return (
     	<AuthContext.Provider value={{ user, loading, login, register, logout }}>
-    	  {children}
+    	    {children}
     	</AuthContext.Provider>
     );
 };
@@ -62,7 +75,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {
-      throw new Error("useAuth must be used within an AuthProvider");
+        throw new Error("useAuth must be used within an AuthProvider");
     }
     return context;
 };
