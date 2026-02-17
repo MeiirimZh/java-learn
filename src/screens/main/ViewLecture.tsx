@@ -1,4 +1,4 @@
-import { useLayoutEffect, useEffect } from "react";
+import { useLayoutEffect, useEffect, useState } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import Markdown from "react-native-markdown-display";
 
@@ -17,6 +17,8 @@ export default function ViewLecture({ route, navigation }: Props) {
     const { lecture } = route.params;
     const { user } = useAuth();
 
+    const [ haveRead, setHaveRead ] = useState<boolean>(false);
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: lecture.title
@@ -24,7 +26,7 @@ export default function ViewLecture({ route, navigation }: Props) {
     }, [navigation, lecture.title]);
 
     useEffect(() => {
-        if (!user) return;
+        if (!user || !haveRead) return;
 
         const updateUser = async () => {
             await updateDoc(doc(db, "users", user.uid), {
@@ -33,12 +35,27 @@ export default function ViewLecture({ route, navigation }: Props) {
         };
 
         updateUser();
-    }, [user, lecture.id]);
+    }, [haveRead, user, lecture.id]);
     
     return (
         <View style={ styles.main }>
             <ScrollView
-                showsVerticalScrollIndicator={ false }>
+                showsVerticalScrollIndicator={ false }
+                onScroll={({ nativeEvent }) => {
+                    const { layoutMeasurement, contentOffset, contentSize } = nativeEvent;
+
+                    const isEndReached = 
+                        layoutMeasurement.height + contentOffset.y >=
+                        contentSize.height - 20;
+                    
+                    if (isEndReached) {
+                        if (!haveRead) {
+                            console.log("End!");
+                            setHaveRead(true);
+                        }
+                    }
+                }}
+                scrollEventThrottle={16} >
                 <Markdown>{ lecture.content }</Markdown>
             </ScrollView>
         </View>
