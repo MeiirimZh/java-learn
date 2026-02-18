@@ -1,5 +1,8 @@
 const colors = {
     primary: 'hsla(29, 100%, 45%, 1.0)',
+    secondary: 'hsla(187.391, 95.833%, 28.235%, 1.0)',
+    tertiary: 'hsla(40.957, 100%, 45.098%, 1.0)',
+
     onPrimary: 'hsla(0, 0%, 100%, 1.0)',
 
     bgLight: 'hsla(0, 0%, 100%, 1.0)',

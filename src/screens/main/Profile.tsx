@@ -100,7 +100,7 @@ export default function Profile() {
                     totalCount={ labWorksCount }
                     progress={ labWorksProgress }
                     size={ 80 }
-                    color={ theme.colors.primary } />
+                    color={ theme.colors.secondary } />
 
                 <CircularStatistics
                     title="Тесты"
@@ -108,7 +108,22 @@ export default function Profile() {
                     totalCount={ testsCount }
                     progress={ testsProgress }
                     size={ 80 }
-                    color={ theme.colors.primary } />
+                    color={ theme.colors.tertiary } />
+            </View>
+
+            <View style={ styles.info }>
+                <View style={ styles.infoField }>
+                    <Ionicons name="person" size={ 14 } color={ theme.colors.textMuted } />
+                    <AppText style={{ color: theme.colors.text }}>{ surname } { name }</AppText>
+                </View>
+                <View style={ styles.infoField }>
+                    <Ionicons name="school" size={ 14 } color={ theme.colors.textMuted } />
+                    <AppText style={{ color: theme.colors.text }}>{ group }</AppText>
+                </View>
+                <View style={ styles.infoField }>
+                    <Ionicons name="mail" size={ 14 } color={ theme.colors.textMuted } />
+                    <AppText style={{ color: theme.colors.text }}>{ user?.email }</AppText>
+                </View>
             </View>
         
             <TouchableOpacity
@@ -135,6 +150,15 @@ const styles = StyleSheet.create({
     },
     statistics: {
         flexDirection: 'row',
+        gap: theme.spacing.md
+    },
+
+    info: {
+        width: '50%'
+    },
+    infoField: {
+        flexDirection: 'row',
+        alignItems: 'center',
         gap: theme.spacing.md
     },
 
