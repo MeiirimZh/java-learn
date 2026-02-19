@@ -5,6 +5,9 @@ import AppText from "./AppText";
 import { theme } from "../src/theme";
 import { Ionicons } from "@expo/vector-icons";
 
+import HarvardIcon from "../assets/svg/HarvardIcon";
+import LogoIcon from "../assets/svg/LogoIcon";
+
 type Props = {
     title: string;
     isCompleted: boolean;
@@ -16,18 +19,46 @@ type Props = {
 };
 
 export default function LectureCard({ title, isCompleted, course_title, level, number, description, onPress }: Props) {
-    const {width, height} = useWindowDimensions();
+    const { width } = useWindowDimensions();
     const levelAndNumber = `${level} уровень, ${number} лекция`;
+
+    const courseIcon = () => {
+        if (course_title === "JAVA 25 SELF") {
+            return (
+                <LogoIcon width={ 50 } height={ 50 } />
+            )
+        }
+        else if (course_title === "Harvard CS50") {
+            return (
+                <HarvardIcon width={ 50 } height={ 50 } />
+            )
+        }
+    };
+
+    const completedIcon = () => {
+        if (isCompleted) {
+            return (
+                <Ionicons 
+                    style={{ position: 'absolute', right: -8, top: -8 }}
+                    name="checkmark-circle"
+                    color="green"
+                    size={ 16 } />
+            )
+        }
+    };
 
     return (
         <View style={ {width: width - theme.spacing.md * 2, padding: theme.spacing.sm} } >
             <TouchableOpacity style={ styles.main } onPress={ onPress } >
                 <View style={ styles.header } >
-                    <AppText numberOfLines={ 2 } style={ [styles.titleText, {width: width - theme.spacing.md * 5 - 24}] } >
+                    <AppText numberOfLines={ 2 } style={ [styles.titleText, {width: width - theme.spacing.md * 6 - 50}] } >
                         { title }
                     </AppText>
 
-                    {isCompleted && <Ionicons name="checkmark-circle" size={ 24 } color='green' /> }
+                    <View style={{ position: 'relative' }}>
+                        { courseIcon() }
+                        { completedIcon() }
+                    </View>
                 </View>
 
                 <View style={ styles.details } >
@@ -60,6 +91,7 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        gap: theme.spacing.md,
 
         marginBottom: theme.spacing.sm
     },
