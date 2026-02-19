@@ -39,7 +39,7 @@ export default function MainTabs() {
               height: 100
             }
           })}>
-            <Tab.Screen name="Home" component={ Home } options={{ title: 'Главная' }} />
+            <Tab.Screen name="Home" component={ Home } options={{ title: 'Информация' }} />
             <Tab.Screen name="Lectures" component={ Lectures } options={{ title: 'Лекции', headerShown: false }} />
             <Tab.Screen name="LabWorks" component={ LabWorks } options={{ title: 'Лаб. работы', headerShown: false }} />
             <Tab.Screen name="Tests" component={ Tests } options={{ title: 'Тесты' }} />

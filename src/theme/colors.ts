@@ -14,6 +14,8 @@ const colors = {
 
     shadow: 'hsla(0, 0%, 0%, 1.0)',
 
+    border: 'hsla(0, 0%, 50%, 1.0)',
+
     danger: 'hsla(12, 100%, 45%, 1.0)',
 };
 
