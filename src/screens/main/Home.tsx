@@ -56,7 +56,7 @@ export default function Home() {
                 </AppText>
             </View>
 
-            <StatusBar barStyle="dark-content" />
+            <StatusBar barStyle="light-content" />
         </ScrollView>
     )
 }

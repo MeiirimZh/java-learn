@@ -4,6 +4,8 @@ import { LabWorksStackParamList } from "../../navigation/types";
 import LabWorksList from "./LabWorksList";
 import ViewLabWork from "./ViewLabWork";
 
+import { theme } from "../../theme";
+
 const Stack = createStackNavigator<LabWorksStackParamList>();
 
 export default function LabWorks() {
@@ -11,7 +13,11 @@ export default function LabWorks() {
         <Stack.Navigator
             screenOptions={{
                 headerStyle: {
+                    backgroundColor: theme.colors.primary,
                     height: 100
+                },
+                headerTitleStyle: {
+                    color: theme.colors.onPrimary
                 }
             }}>
             <Stack.Screen name="LabWorksList" component={ LabWorksList } options={{ title: 'Лабораторные работы' }} />

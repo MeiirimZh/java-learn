@@ -38,7 +38,11 @@ export default function MainTabs() {
             tabBarStyle: { height: 100 },
 
             headerStyle: {
+              backgroundColor: theme.colors.primary,
               height: 100
+            },
+            headerTitleStyle: {
+              color: theme.colors.onPrimary
             }
           })}>
             <Tab.Screen name="Home" component={ Home } options={{ title: 'Информация' }} />
