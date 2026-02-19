@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Home from "../screens/main/Home";
+import About from "../screens/main/About";
 import Lectures from "../screens/main/Lectures";
 import LabWorks from "../screens/main/LabWorks";
 import Tests from "../screens/main/Tests";
@@ -17,6 +18,7 @@ export default function MainTabs() {
             tabBarIcon: ({ focused, color, size }) => {
               const icons = {
                 Home: focused ? 'home' : 'home-outline',
+                About: focused ? 'folder' : 'folder-outline',
                 Lectures: focused ? 'book' : 'book-outline',
                 LabWorks: focused ? 'flask' : 'flask-outline',
                 Tests: focused ? 'clipboard' : 'clipboard-outline',
@@ -40,6 +42,7 @@ export default function MainTabs() {
             }
           })}>
             <Tab.Screen name="Home" component={ Home } options={{ title: 'Информация' }} />
+            <Tab.Screen name="About" component={ About } options={{ title: 'Об учебнике' }} />
             <Tab.Screen name="Lectures" component={ Lectures } options={{ title: 'Лекции', headerShown: false }} />
             <Tab.Screen name="LabWorks" component={ LabWorks } options={{ title: 'Лаб. работы', headerShown: false }} />
             <Tab.Screen name="Tests" component={ Tests } options={{ title: 'Тесты' }} />
