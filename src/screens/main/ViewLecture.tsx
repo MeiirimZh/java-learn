@@ -57,6 +57,8 @@ export default function ViewLecture({ route, navigation }: Props) {
                 }}
                 scrollEventThrottle={16} >
                 <Markdown>{ lecture.content }</Markdown>
+
+                <View style={{ height: theme.spacing.md }} />
             </ScrollView>
         </View>
     )
@@ -70,6 +72,8 @@ const styles = StyleSheet.create({
     lecture: {
         backgroundColor: theme.colors.bgLight,
 
-        padding: theme.spacing.md
+        borderRadius: 10,
+        
+        padding: theme.spacing.md,
     }
 });

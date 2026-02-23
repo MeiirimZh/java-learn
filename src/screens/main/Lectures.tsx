@@ -16,9 +16,7 @@ export default function Lectures() {
                     backgroundColor: theme.colors.primary,
                     height: 100
                 },
-                headerTitleStyle: {
-                    color: theme.colors.onPrimary
-                }
+                headerTintColor: theme.colors.onPrimary
             }}>
             <Stack.Screen name="LecturesList" component={ LecturesList } options={{ title: 'Лекции' }} />
             <Stack.Screen name="ViewLecture" component={ ViewLecture } />

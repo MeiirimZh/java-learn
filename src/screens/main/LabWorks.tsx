@@ -16,9 +16,7 @@ export default function LabWorks() {
                     backgroundColor: theme.colors.primary,
                     height: 100
                 },
-                headerTitleStyle: {
-                    color: theme.colors.onPrimary
-                }
+                headerTintColor: theme.colors.onPrimary
             }}>
             <Stack.Screen name="LabWorksList" component={ LabWorksList } options={{ title: 'Лабораторные работы' }} />
             <Stack.Screen name="ViewLabWork" component={ ViewLabWork } />
