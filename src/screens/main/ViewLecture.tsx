@@ -40,7 +40,7 @@ export default function ViewLecture({ route, navigation }: Props) {
     return (
         <View style={ styles.main }>
             <ScrollView
-                style={ styles.lecture }
+                contentContainerStyle={ styles.lecture }
                 showsVerticalScrollIndicator={ false }
                 onScroll={({ nativeEvent }) => {
                     const { layoutMeasurement, contentOffset, contentSize } = nativeEvent;
@@ -56,9 +56,13 @@ export default function ViewLecture({ route, navigation }: Props) {
                     }
                 }}
                 scrollEventThrottle={16} >
-                <Markdown>{ lecture.content }</Markdown>
-
-                <View style={{ height: theme.spacing.md }} />
+                <Markdown
+                    style={{
+                        code_inline: {
+                            backgroundColor: "#ededeb",
+                            color: "#eb5757"    
+                        }
+                    }}>{ lecture.content }</Markdown>
             </ScrollView>
         </View>
     )
