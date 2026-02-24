@@ -68,7 +68,7 @@ JavaRush — это не просто очередной онлайн‑курс
 `;
 
 export const lecture_01_00: Lecture = {
-    id: 20,
+    id: 8,
     title: "Обучение Java программированию с нуля",
     course_id: 1,
     level: 1,
