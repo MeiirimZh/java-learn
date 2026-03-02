@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "java-learn",
+    "name": "Java Learn",
     "slug": "java-learn",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -22,7 +22,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.javalearn"
+      "package": "com.meiirim.zhanzhumanov.javalearn"
     },
     "web": {
       "favicon": "./assets/favicon.png"
