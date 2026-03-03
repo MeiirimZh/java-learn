@@ -68,6 +68,7 @@ export default function Login({ navigation }: Props) {
                         <TextInput
                             style={ [styles.textInput, styles.shadow] }
                             placeholder="Email"
+                            placeholderTextColor={ theme.colors.textMuted }
                             value={ email }
                             onChangeText={ setEmail }
                             keyboardType="email-address"
@@ -75,6 +76,7 @@ export default function Login({ navigation }: Props) {
                         <TextInput
                             style={ [styles.textInput, styles.shadow] }
                             placeholder="Пароль"
+                            placeholderTextColor={ theme.colors.textMuted }
                             value={ password }
                             onChangeText={ setPassword }
                             secureTextEntry />

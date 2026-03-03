@@ -81,21 +81,25 @@ export default function Register({ navigation }: Props) {
                     <View style={ styles.form }>
                         <TextInput 
                             placeholder="Имя"
+                            placeholderTextColor={ theme.colors.textMuted }
                             value={ name }
                             onChangeText={ setName }
                             style={ [styles.textInput, styles.shadow] } />
                         <TextInput 
                             placeholder="Фамилия"
+                            placeholderTextColor={ theme.colors.textMuted }
                             value={ surname }
                             onChangeText={ setSurname }
                             style={ [styles.textInput, styles.shadow] } />
                         <TextInput 
                             placeholder="Группа"
+                            placeholderTextColor={ theme.colors.textMuted }
                             value={ group }
                             onChangeText={ setGroup }
                             style={ [styles.textInput, styles.shadow] } />
                         <TextInput
                             placeholder="Email"
+                            placeholderTextColor={ theme.colors.textMuted }
                             value={ email }
                             onChangeText={ setEmail }
                             style={ [styles.textInput, styles.shadow] }
@@ -103,6 +107,7 @@ export default function Register({ navigation }: Props) {
                             autoCapitalize="none" />
                         <TextInput
                             placeholder="Пароль"
+                            placeholderTextColor={ theme.colors.textMuted }
                             value={ password }
                             onChangeText={ setPassword }
                             style={ [styles.textInput, styles.shadow] }
